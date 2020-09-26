@@ -9,7 +9,7 @@ $(function () {
     //let currentLetter = currentSentence[j];
 
     sentenceDiv.html(sentences[i]);
-    $("#target-letter").append(currentSentence[j]);
+    $("#target-letter").html(currentSentence[j]);
 
     const lowerKeyboard = $("#keyboard-lower-container");
     const upperKeyboard = $("#keyboard-upper-container")
