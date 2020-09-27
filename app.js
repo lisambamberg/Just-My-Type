@@ -9,7 +9,6 @@ $(function () {
     //let currentLetter = currentSentence[j];
 
     sentenceDiv.html(sentences[i]);
-    $("#target-letter").html(currentSentence[j]);
 
     const lowerKeyboard = $("#keyboard-lower-container");
     const upperKeyboard = $("#keyboard-upper-container")
@@ -40,5 +39,6 @@ $(function () {
         lowerKeyboard.show()
         upperKeyboard.hide()
         $(`#${key}`).css("backgroundColor", "#f5f5f5");
+        $("#target-letter").html(currentSentence[j]);
     })
 })
