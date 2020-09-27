@@ -3,11 +3,13 @@ $(function () {
     //let sentences = ['ten ate', 'neite ate', 'nee enet'];
     let sentenceDiv = $("#sentence");
     let yellowBlock = $("#yellow-block");
+    let targetLetter = $("#target-letter");
     let i = 0;
     let j = 0;
-    let currentSentence = sentences[i];
+    let individualSent = sentences[j].split("");
+    console.log(individualSent);
     sentenceDiv.html(sentences[i]);
-    $("#target-letter").html(currentSentence[j]);
+    targetLetter.html(individualSent[i]);
 
     const lowerKeyboard = $("#keyboard-lower-container");
     const upperKeyboard = $("#keyboard-upper-container")
@@ -28,7 +30,7 @@ $(function () {
             if (j == sentences[i].length) {
                 i++;
                 j = 0;
-
+                individualSent = sentences[i].split("");
                 sentenceDiv.html(sentences[i]);
             }
         }
@@ -39,5 +41,6 @@ $(function () {
         lowerKeyboard.show()
         upperKeyboard.hide()
         $(`#${key}`).css("backgroundColor", "#f5f5f5");
+        targetLetter.html(individualSent[j]);
     })
 })
