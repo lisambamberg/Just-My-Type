@@ -1,6 +1,6 @@
 $(function () {
-    let sentences = ["ten ate neite ate nee enet ite ate inet ent eate", "Too ato too nOt enot one totA not anot tOO aNot", "oat itain oat tain nate eate tea anne inant nean", "itant eate anot eat nato inate eat anot tain eat", "nee ene ate ite tent tiet ent ine ene ete ene ate"];
-    //let sentences = ['ten ate', 'neite ate', 'nee enet'];
+    //let sentences = ["ten ate neite ate nee enet ite ate inet ent eate", "Too ato too nOt enot one totA not anot tOO aNot", "oat itain oat tain nate eate tea anne inant nean", "itant eate anot eat nato inate eat anot tain eat", "nee ene ate ite tent tiet ent ine ene ete ene ate"];
+    let sentences = ['ten ate', 'neite ate', 'nee enet'];
     let sentenceDiv = $("#sentence");
     let yellowBlock = $("#yellow-block");
     let targetLetter = $("#target-letter");
@@ -10,6 +10,7 @@ $(function () {
     console.log(individualSent);
     sentenceDiv.html(sentences[i]);
     targetLetter.html(individualSent[i]);
+    let feedback = $("#feedback");
 
     const lowerKeyboard = $("#keyboard-lower-container");
     const upperKeyboard = $("#keyboard-upper-container")
@@ -17,14 +18,30 @@ $(function () {
     upperKeyboard.hide();
 
     $(document).keydown(function (e) {
+        //prevents auto scroll when space bar is pressed
+        if (e.keyCode === 32) {
+            e.preventDefault();
+        }
         let key = e.key.charCodeAt(0);
         if (e.keyCode == 16 && e.key === "Shift") {
             lowerKeyboard.hide()
             upperKeyboard.show()
         } else {
+            console.log(e.key);
+            console.log(individualSent[j]);
+            if (e.key === individualSent[j]) {
+                feedback.addClass("glyphicon-ok");
+                feedback.removeClass("glyphicon-remove");
+                feedback.html("&#10003;");
+            }
+            if (e.key !== individualSent[j]) {
+                feedback.removeClass("glyphicon-ok");
+                feedback.addClass("glyphicon-remove");
+                feedback.html("&#10060;");
+            }
             $(`#${key}`).css("backgroundColor", "yellow");
-            console.log(j);
-            console.log("sentences length", sentences[i].length);
+            // console.log(j);
+            // console.log("sentences length", sentences[i].length);
             j++;
 
             if (j == sentences[i].length) {
