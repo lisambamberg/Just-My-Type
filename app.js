@@ -1,6 +1,6 @@
 $(function () {
-    let sentences = ["ten ate neite ate nee enet ite ate inet ent eate", "Too ato too nOt enot one totA not anot tOO aNot", "oat itain oat tain nate eate tea anne inant nean", "itant eate anot eat nato inate eat anot tain eat", "nee ene ate ite tent tiet ent ine ene ete ene ate"];
-    //let sentences = ['ten ate', 'neite ate',];
+    //let sentences = ["ten ate neite ate nee enet ite ate inet ent eate", "Too ato too nOt enot one totA not anot tOO aNot", "oat itain oat tain nate eate tea anne inant nean", "itant eate anot eat nato inate eat anot tain eat", "nee ene ate ite tent tiet ent ine ene ete ene ate"];
+    let sentences = ['ten ate', 'neite ate',];
     let sentenceDiv = $("#sentence");
     let yellowBlock = $("#yellow-block");
     let targetLetter = $("#target-letter");
@@ -23,7 +23,7 @@ $(function () {
         if (startTime === null) {
             startTime = Date.now();
         }
-        //prevents auto scroll when space bar is pressed
+        //prevents auto scroll when space bar is pressed in small screen
         if (e.keyCode === 32) {
             e.preventDefault();
         }
@@ -55,9 +55,10 @@ $(function () {
                     let minutes = Math.abs((stopTime - startTime)) / 60000;
                     let wordsPerMinute = numberOfWords / minutes - 2 * numberOfMistakes;
                     function results(x) {
-                        alert("Your words per minute: " + x.toFixed(2));
+                        alert("Your words per minute: " + x.toFixed(1));
                     }
                     results(wordsPerMinute);
+                    endGame();
                 } else {
                     individualSent = sentences[i].split("");
                     sentenceDiv.html(sentences[i]);
@@ -73,4 +74,24 @@ $(function () {
         $(`#${key}`).css("backgroundColor", "#f5f5f5");
         targetLetter.html(individualSent[j]);
     })
+
+    function endGame() {
+        let replayDiv = $("<div>Try again?</div>");
+        let restartBtn = $("<button>yes</button>");
+        let cancelBtn = $("<button>no</button>");
+        replayDiv.addClass("replayDiv");
+        feedback.append(replayDiv);
+        replayDiv.append(restartBtn);
+        replayDiv.append(cancelBtn);
+        restartBtn.click(function () {
+            location.reload();
+        })
+        // cancelBtn.click(function () {
+        //     feedback.hide();
+        //     targetLetter.hide();
+        //     yellowBlock.hide();
+        //     sentenceDiv.hide();
+        //     replayDiv.hide();
+        // })
+    }
 })
